@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Employers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Datenaissance</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employer in employers %}
+            <tr>
+                <td><a href="{{ path('employer_show', { 'id': employer.id }) }}">{{ employer.id }}</a></td>
+                <td>{{ employer.nom }}</td>
+                <td>{{ employer.prenom }}</td>
+                <td>{% if employer.dateNaissance %}{{ employer.dateNaissance|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('employer_show', { 'id': employer.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('employer_edit', { 'id': employer.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('employer_new') }}">Create a new employer</a>
+        </li>
+    </ul>
+{% endblock %}
